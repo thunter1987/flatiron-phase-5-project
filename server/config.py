@@ -15,6 +15,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
+app.secret_key = b'\xcc\xc9(p\xa8?\xfd\xf8\x9a\xe5x\x8d\xdc\xb3\xb7\x9f'
 
 # Define metadata, instantiate db
 metadata = MetaData(naming_convention={
