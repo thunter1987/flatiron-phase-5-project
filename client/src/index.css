@@ -1,7 +1,27 @@
 :root {
-  --bg: #282c34;
-  --header: #fff;
-  --link: #61dafb;
-  --text: hsla(0, 0%, 100%, 0.88);
+  --bg-color-1: rgb(255, 255, 255);
+  --bg-color-2: rgba(245, 245, 245);
+  --bg-color-3: rgba(230, 230, 230);
+  --main-font-color: rgb(0, 0, 0);
+  --alt-font-color: rgb(25, 25, 25);
+  --theme-primary: rgba(233, 11, 121, 1);
+  --theme-primary-gradient: linear-gradient(
+    90deg,
+    rgba(233, 11, 121, 1) 0%,
+    rgba(242, 106, 88, 1) 100%
+  );
 }
 
+main.dark-mode {
+  --bg-color-1: rgb(0, 0, 0);
+  --bg-color-2: rgba(50, 50, 50);
+  --bg-color-3: rgba(75, 75, 75);
+  --main-font-color: rgb(200, 200, 200);
+  --alt-font-color: rgb(255, 255, 255);
+  --theme-primary: rgba(91, 13, 232, 1);
+  --theme-primary-gradient: linear-gradient(
+    90deg,
+    rgba(91, 13, 232, 1) 0%,
+    rgba(121, 101, 220, 1) 100%
+  );
+}
