@@ -14,10 +14,10 @@ import os
 
 # Instantiate app, set attributes
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = config('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
-app.SECRET_KEY = config('SECRET_KEY')
+app.secret_key = config('SECRET_KEY')
 
 # Define metadata, instantiate db
 metadata = MetaData(naming_convention={
