@@ -10,6 +10,8 @@ from flask_marshmallow import Marshmallow
 from config import app, db, api
 # Add your model imports
 from models import User
+from dotenv import load_dotenv
+load_dotenv()
 
 ma = Marshmallow(app)
 
@@ -17,15 +19,14 @@ ma = Marshmallow(app)
 
 @app.route('/')
 def index():
-    return '<h1>Welcome to the User Database Project</h1>'
+    return 'Welcome to the User Database Project'
 
 
-class Users(Resource):
-    def get(self):
-        plural_user = {user for user in User}
-        return plural_user
+@app.route('/users')
+def get():
+    plural_user = {user for user in User}
+    return plural_user
 
-api.add_resource(Users, '/users')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
