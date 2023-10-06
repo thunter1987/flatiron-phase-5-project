@@ -14,6 +14,7 @@ class User(db.Model, SerializerMixin):
     admin = db.Column(db.Boolean, nullable=False, default=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
-
+    _password_hash = db.Column(db.String)
+    
     def __repr__(self):
         return f"User ID: {self.id} /nName: {self.name} /nEmail: {self.email} /nAdmin: {self.admin} /nCreated: {self.created_at} /nLast Updated: {self.updated_at}"
