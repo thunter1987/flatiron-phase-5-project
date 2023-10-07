@@ -21,6 +21,7 @@ psycopg2 = "*"
 psycopg2-binary = "*"
 gunicorn = "*"
 ipython = "*"
+flask-bcrypt = "*"
 
 [requires]
 python_full_version = "3.8.13"
