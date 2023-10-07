@@ -1,7 +1,8 @@
 # Standard library imports
 
 # Remote library imports
-from flask import Flask
+from flask import Flask, render_template
+from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_restful import Api
@@ -20,7 +21,10 @@ app = Flask(
     template_folder='../client/build'
     )
 
-app.config['SQLALCHEMY_DATABASE_URI'] = config('SQLALCHEMY_DATABASE_URI')
+def index(id=0):
+    return render_template("index.html")
+
+app.config['SQLALCHEMY_DATABASE_URI'] = config('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 app.secret_key = config('SECRET_KEY')
@@ -38,3 +42,4 @@ api = Api(app)
 
 # Instantiate CORS
 CORS(app)
+bcrypt = Bcrypt(app)
