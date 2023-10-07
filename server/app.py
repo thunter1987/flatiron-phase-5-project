@@ -9,10 +9,10 @@ from flask_marshmallow import Marshmallow
 
 # Local imports
 from config import app, db, api
+from dotenv import load_dotenv
 
 # Add your model imports
 from models import User
-from dotenv import load_dotenv
 
 load_dotenv()
 

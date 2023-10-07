@@ -23,6 +23,7 @@ if __name__ == "__main__":
                 name=fake.name(),
                 email=fake.email(),
                 admin=rc([0,1]),
+                password_hash=fake.password()
             )
             users.append(user)
             
