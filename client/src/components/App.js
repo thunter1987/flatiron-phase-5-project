@@ -10,24 +10,23 @@ function App() {
   const updateUser = (user) => setUser(user);
 
   useEffect(() => {
-    fetch("/authorized")
-      .then(resp => {
-        console.log(resp)
-        if (resp.ok) {
-          resp.json().then(user => setUser(user))
-        } else {
-          resp.json().then(err => setErrors(err))
-        }
-      }, []);
-  }
-  )
+    fetch("/").then((resp) => {
+      console.log(resp);
+      if (resp.ok) {
+        resp.json().then((user) => setUser(user));
+      } else {
+        resp.json().then((err) => setErrors(err));
+      }
+    }, []);
+  });
 
-    return (<>
+  return (
+    <>
       <h1>Project Client</h1>
       <Navigation />
-      <Authentication updateUser={ updateUser } />
+      <Authentication updateUser={updateUser} />
     </>
-    )
-  }
+  );
+}
 
 export default App;
