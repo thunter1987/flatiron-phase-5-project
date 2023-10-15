@@ -25,15 +25,12 @@ app = Flask(
 def index(id=0):
     return render_template("index.html")
 
-<<<<<<< Updated upstream
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-=======
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
->>>>>>> Stashed changes
 app.json.compact = False
 app.secret_key = b"\xcc\xc9(p\xa8?\xfd\xf8\x9a\xe5x\x8d\xdc\xb3\xb7\x9f"
 

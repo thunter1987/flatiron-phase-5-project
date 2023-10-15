@@ -32,6 +32,7 @@ if __name__ == "__main__":
         role=roles[4],
         _password_hash=bcrypt.generate_password_hash(password1).decode('utf8')
         )
+      users.append(user1)
         
       for _ in range(20):
         new_first_name=fake.first_name()
