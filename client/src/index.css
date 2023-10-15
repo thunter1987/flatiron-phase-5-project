@@ -25,3 +25,14 @@ main.dark-mode {
     rgba(121, 101, 220, 1) 100%
   );
 }
+
+main {
+  display:flex ;
+  margin: auto;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  color: var(--main-font-color);
+  background-color: var(--bg-color-1);
+  transition: all 0.5s;
+  box-shadow: 5px 5px 15px -6px #8c8c8c;
+}

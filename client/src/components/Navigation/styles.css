@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+  }
+  
+  .nav {
+    background-color:blue;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+  .nav .active {
+    background-color: #666;
+  }
+  
+  .site-title {
+    font-size: 2rem;
+  }
+  ul {
+    background:blue;
+    margin: 20;
+    padding: 500;
+    list-style: none;
+    display: flex;
+    gap: 1 rem;
+  }
+  .nav li :hover {
+    display: flex;
+    background-color: #999;
+  }
+  .nav li {
+    padding: 15px;
+  }
+  .nav a {
+    color: inherit;
+  }

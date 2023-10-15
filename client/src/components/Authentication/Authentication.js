@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Login from "../Login/Login";
+import "./styles.css";
 
 const Authentication = ({ updateUser }) => {
   const [signUp, setSignUp] = useState(false);
@@ -30,8 +32,15 @@ const Authentication = ({ updateUser }) => {
     const config = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(
-            signUp ? userData : { name: userData.name, email: userData.email, password: userData.password }),
+      body: JSON.stringify(
+        signUp
+          ? userData
+          : {
+              name: userData.name,
+              email: userData.email,
+              password_hash: userData.password,
+            }
+      ),
     };
     fetch(signUp ? "/users" : "/login", config)
       .then((resp) => resp.json())
@@ -73,24 +82,18 @@ const Authentication = ({ updateUser }) => {
             <label>Password</label>
             <input
               aria-required
-              required
-              type='string'
+              type='password'
               name='password'
               value={userData.password}
               onChange={handleChange}
+              aria-hidden
             />
           </>
         )}
         <input type='submit' value={signUp ? "Sign Up!" : "Log In!"} />
       </form>
 
-      <div className='auth-errors-switch-wrapper'>
-        <h2 className='auth-errors'>{"Errors here!!"}</h2>
-        <h2>{signUp ? "Already a member?" : "Not a member?"}</h2>
-        <button onClick={handleSignUpClick}>
-          {signUp ? "Log In!" : "Register now!"}
-        </button>
-      </div>
+      
     </>
   );
 };
