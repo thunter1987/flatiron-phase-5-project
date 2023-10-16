@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import HamburgerMenu from 'react-hamburger-menu';
-import './Navbar.css';
+import './styles.css';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

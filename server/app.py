@@ -15,11 +15,12 @@ from models import User
 
 
 @app.route("/")
-@app.route('/<int:id>')
+@app.route("/<int:id>")
 def index(id=0):
     return render_template("index.html")
 
-@app.route("/register", methods=["POST"])
+
+@app.route("/register", methods=["GET", "POST"])
 def register():
     data = request.json
     hashed_password = bcrypt.generate_password_hash(data["password"]).decode("utf-8")
@@ -41,7 +42,7 @@ def register():
     )
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     data = request.json
     user = User.query.filter_by(username=data["username"]).first()
@@ -61,6 +62,7 @@ def login():
             return make_response(["message:", " Password incorrect"], 401)
     else:
         return make_response(({"message": "Invalid credentials"}), 401)
+
 
 @app.route("/check_session", methods=["GET"])
 def check_session():
