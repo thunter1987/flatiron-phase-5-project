@@ -26,10 +26,10 @@ def index():
     return "Welcome to the User Database Project"
 
 
-class Users(Resource):
+class Login(Resource):
     def post(self):
         data = request.get_json()
-        user = User(name=data["name"], email=data["email"], password=data["password"])
+        user = User(username=data["username"], password=data["password"])
 
         # Add new user to DB
         db.session.add(user)
@@ -46,7 +46,7 @@ class Users(Resource):
         return response
 
 
-api.add_resource(Users, "/users")
+api.add_resource(Login, "/login")
 
 @app.route("/authorized", methods=["GET"])
 def authorized():

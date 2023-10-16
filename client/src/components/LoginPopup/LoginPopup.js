@@ -10,9 +10,7 @@ const LoginPopup = ({ setUserRole }) => {
   const [errors, setErrors] = useState(null);
   const [formData, setFormData] = useState({
     username: '',
-    email: '',
     password: '',
-    confirmPassword: '',
     rememberMe: false,
   });
 
@@ -30,9 +28,14 @@ const LoginPopup = ({ setUserRole }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const config = {
+      method: "POST",
+      headers: {"Content-Type": "application/json" },
+      body: JSON.stringify(formData)
+    }
 
     try {
-      const response = await axios.post('/login', formData);
+      const response = await axios.post('/login', config);
       console.log(response.data);
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -51,6 +54,7 @@ const LoginPopup = ({ setUserRole }) => {
                 <input
                   type="text"
                   name="username"
+                  placeholder="Enter Username"
                   value={ formData.username }
                   onChange={ handleInputChange }
                   required
@@ -61,6 +65,7 @@ const LoginPopup = ({ setUserRole }) => {
                 <input
                   type="password"
                   name="password"
+                  placeholder="Enter Password"
                   value={ formData.password }
                   onChange={ handleInputChange }
                   required

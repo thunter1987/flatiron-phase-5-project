@@ -10,12 +10,14 @@ class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
+    first_name = db.Column(db.String, nullable=False)
+    last_name = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=False, unique=True)
     email = db.Column(db.String, unique=True, nullable=False)
-    admin = db.Column(db.Boolean, nullable=False, default=False)
+    role = db.Column(db.String, default="basic")
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
-    _password_hash = db.Column(db.String)
+    _password_hash = db.Column(db.String, nullable=False)
     
     @hybrid_property
     def password_hash(self):
