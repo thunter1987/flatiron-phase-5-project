@@ -8,10 +8,12 @@ from flask_migrate import Migrate
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
-from decouple import config
+from dotenv import load_dotenv
 
 # Local imports
 import os
+
+load_dotenv()
 
 # Instantiate app, set attributes
 app = Flask(
@@ -28,7 +30,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
-app.secret_key = config('SECRET_KEY')
+
+app.secret_key = os.environ.get('SECRET_KEY')
 
 # Define metadata, instantiate db
 metadata = MetaData(naming_convention={
