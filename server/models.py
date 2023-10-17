@@ -32,3 +32,21 @@ class User(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f"User ID: {self.id} /nName: {self.name} /nEmail: {self.email} /nAdmin: {self.admin} /nCreated: {self.created_at} /nLast Updated: {self.updated_at}"
+    
+class Post(db.Model, SerializerMixin):
+    __tablename__ = "posts"
+    
+    id = db.Column(db.Integer, primary_key=True)
+    tags = db.Column(db.String)
+    header = db.Column(db.String(30))
+    body = db.Column(db.String)
+    db.relationship(backref=User.id)
+    
+class Reply(db.Model, SerializerMixin):
+    __tablename__ = "replies"
+    
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String)
+    db.relationship(backref=User.id)
+    db.relationship(backref=Post.id)
+
