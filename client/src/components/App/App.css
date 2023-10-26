@@ -1,6 +1,6 @@
 .app {
-  color: var(--text-primary);
-  background-color: var(--background);
+  color: var(--main-font-color);
+  background-color: var(--bg-color-1);
   font-size: large;
   font-weight: bold;
   padding: 20px;
@@ -8,7 +8,7 @@
   transition: all .5s;
 }
 .app button {
-  color: var(--text-primary);
+  color: var(--main-font-color);
   background-color: var(--background);
   border: 2px var(--text-primary) solid;
   float: right;

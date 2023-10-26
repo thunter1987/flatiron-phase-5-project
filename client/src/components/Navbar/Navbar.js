@@ -1,40 +1,34 @@
-import React, { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import HamburgerMenu from 'react-hamburger-menu';
 import './Navbar.css';
+import useLocalStorage from 'use-local-storage';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
+  const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
+  document.documentElement.setAttribute("data-theme", theme)
+
+  const switchTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+  }
+
   return (
     <div className="navbar">
-      <div className="nav-brand">
-        <Link to="/">Your Logo</Link>
-        <div className="nav-links">
-          <div className="nav-hamburger">
-            <HamburgerMenu
-              isOpen={ isOpen }
-              menuClicked={ handleToggle }
-              width={ 30 }
-              height={ 20 }
-              strokeWidth={ 3 }
-              rotate={ 0 }
-              color="black"
-              borderRadius={ 0 }
-              animationDuration={ 0.5 }>
-              <Link to="/">Home</Link>
-              <Link to="/login">Login/Signup</Link>
-            </ HamburgerMenu>
-            <div className="content">
-              <Outlet />
-            </div>
-          </div >
-        </div>
+      <div className="toggle-theme-wrapper">
+        <span>☀️</span>
+        <label className="toggle-theme" htmlFor="checkbox">
+          <input
+            type="checkbox"
+            id="checkbox"
+            onChange={switchTheme}
+            defaultChecked={theme === "dark"}
+          />
+          <div className="slider round"></div>
+        </label>
+        <span>🌒</span>
       </div>
-    </div>
+      Navbar Component
+    </div >
   );
 };
 

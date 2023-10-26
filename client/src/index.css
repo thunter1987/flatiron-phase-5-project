@@ -12,7 +12,7 @@
   );
 }
 
-main.dark-mode {
+[data-theme="dark"] {
   --bg-color-1: rgb(0, 0, 0);
   --bg-color-2: rgba(50, 50, 50);
   --bg-color-3: rgba(75, 75, 75);
