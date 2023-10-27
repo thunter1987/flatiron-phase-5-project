@@ -1,7 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import DarkMode from '../DarkModeToggle/DarkMode';
-import Signup from '../Signup/Signup';
-import Home from '../Home/Home';
 import './styles.css';
 
 const Navbar = () => {
@@ -14,7 +12,7 @@ const Navbar = () => {
       </div>
     </div>
     <nav className="navbar-links">
-      <NavLink to="/">{ Home }</NavLink>
+      <NavLink to="/">Home</NavLink>
       <NavLink to="/signup">Sign In / Register</NavLink>
     </nav>
   </>
