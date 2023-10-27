@@ -12,16 +12,11 @@
   );
 }
 
-[data-theme="dark"] {
-  --bg-color-1: rgb(0, 0, 0);
-  --bg-color-2: rgba(50, 50, 50);
-  --bg-color-3: rgba(75, 75, 75);
-  --main-font-color: rgb(200, 200, 200);
-  --alt-font-color: rgb(255, 255, 255);
-  --theme-primary: rgba(91, 13, 232, 1);
-  --theme-primary-gradient: linear-gradient(
-    90deg,
-    rgba(91, 13, 232, 1) 0%,
-    rgba(121, 101, 220, 1) 100%
-  );
+ [data-theme="dark"] {
+  --bg-color-1: #030303;
+  --bg-color-2: #141414;
+  --bg-color-3: #262626;
+  --main-font-color: #52FF8E;
+  --alt-font-color: #F861FF;
+  --theme-primary: #FFDA2F;
 }

@@ -1,16 +1,21 @@
 .app {
-  color: var(--main-font-color);
+  color: var(--alt-font-color);
   background-color: var(--bg-color-1);
-  font-size: large;
+  font-size:medium;
   font-weight: bold;
-  padding: 20px;
+  padding: 5px;
   height: calc(100vh - 40px);
   transition: all .5s;
 }
 .app button {
   color: var(--main-font-color);
-  background-color: var(--background);
+  text-decoration-color: var(--alt-font-color);
+  background-color: var(--bg-color-1);
   border: 2px var(--text-primary) solid;
   float: right;
   transition: all .5s;
+}
+
+.routes{
+  padding-top: 15px;
 }
