@@ -5,15 +5,15 @@ import './styles.css';
 const Navbar = () => {
 
   return (<>
-    <div className="navbar">
-      Navbar Component
-      <div className="darkmode">
-        <DarkMode />
+    <div className="darkmode">
+      <DarkMode />
+      <div className="navbar">
+        Navbar Component
       </div>
     </div>
     <nav className="navbar-links">
       <NavLink to="/">Home</NavLink>
-      <NavLink to="/signup">Sign In / Register</NavLink>
+      <NavLink to="/login">Sign In / Register</NavLink>
     </nav>
   </>
   );

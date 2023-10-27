@@ -1,10 +1,10 @@
-.signup-page {
+.login-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.signup-form {
+.login-form {
     display: flex;
   justify-content: flex-end;
   flex-direction: column;
