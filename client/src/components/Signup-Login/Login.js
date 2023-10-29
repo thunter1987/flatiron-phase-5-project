@@ -22,6 +22,7 @@ export default function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userData);
+    if (userData.password2 === userData.password) {
     const config = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -29,18 +30,20 @@ export default function Signup() {
         signup
           ? userData
           : {
-              name: userData.name,
+              firstName: userData.firstName,
+              lastName: userData.lastName,
+              username: userData.username,
               email: userData.email,
               password: userData.password,
             }
       ),
     };
-    fetch(signup ? "/users" : "/login", config).then((resp) => {
+    fetch("/login", config).then((resp) => {
       if (resp.ok) {
         console.log(resp);
       }
     });
-  };
+  };}
 
   //   .then((user) => {
   // updateUser(user);
@@ -79,6 +82,7 @@ export default function Signup() {
           onChange={handleChange}
         />
         <input type="submit" value="register" />
+        <a href={setSignup(!signup)}>Register for an Account?</a>
         <a href="/signup">Register for an Account?</a>
       </form>
     </div>
