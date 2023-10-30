@@ -12,7 +12,7 @@ from config import app, db, api
 from dotenv import load_dotenv
 
 # Add your model imports
-from models import User
+from models import User, Post, Reply
 
 load_dotenv()
 
