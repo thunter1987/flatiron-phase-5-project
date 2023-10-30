@@ -6,6 +6,10 @@ from config import db, bcrypt
 
 
 # Models go here!
+post_reply = db.Table('post_reply',
+        db.Column('post_id', db.Integer, db.ForeignKey('posts.id')),
+        db.Column('reply_id', db.Integer, db.ForeignKey('replies.id'))
+         )
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
@@ -18,6 +22,9 @@ class User(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
     _password_hash = db.Column(db.String, nullable=False)
+    posts = db.relationship("Post", backref="poster")
+    replies = db.relationship("Reply", backref="poster")
+    
     
     @hybrid_property
     def password_hash(self):
@@ -27,26 +34,27 @@ class User(db.Model, SerializerMixin):
     @password_hash.setter
     def password_hash(self, password):
         hashed_pw = bcrypt.generate_password_hash(password).decode("utf8")
-        self._password_hash = hashed_pw
-    
-
+        self._password_hash = hashed_pw  
+        
     def __repr__(self):
-        return f"User ID: {self.id} /nName: {self.name} /nEmail: {self.email} /nAdmin: {self.admin} /nCreated: {self.created_at} /nLast Updated: {self.updated_at}"
+        return f"User ID: {self.id} /nName: {self.name} /nEmail: {self.email} /nAdmin: {self.admin}"
     
 class Post(db.Model, SerializerMixin):
     __tablename__ = "posts"
     
     id = db.Column(db.Integer, primary_key=True)
+    poster_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     tags = db.Column(db.String)
     header = db.Column(db.String(30))
     body = db.Column(db.String)
-    db.relationship(backref=User.id)
+    replies = db.relationship('Reply', secondary=post_reply, backref='posts')
     
 class Reply(db.Model, SerializerMixin):
     __tablename__ = "replies"
     
     id = db.Column(db.Integer, primary_key=True)
+    replier_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    
     body = db.Column(db.String)
-    db.relationship(backref=User.id)
-    db.relationship(backref=Post.id)
+    
 
