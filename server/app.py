@@ -29,7 +29,14 @@ def index():
 class Login(Resource):
     def post(self):
         data = request.get_json()
-        user = User(username=data["username"], password=data["password"])
+        user = User.query.filter(User.username == data['username']).first()
+        
+        if user:
+            if user.authenticate(data['password']):
+                session['user.id'] = user.id
+                return user.todict(), 200
+        else:
+            return {'errors': ['Incorrect credentials provided']}, 401
 
         # Add new user to DB
         db.session.add(user)
