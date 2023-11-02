@@ -22,6 +22,7 @@ class User(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
     _password_hash = db.Column(db.String, nullable=False)
+    
     posts = db.relationship("Post", backref="poster")
     replies = db.relationship("Reply", backref="poster")
     
@@ -34,27 +35,32 @@ class User(db.Model, SerializerMixin):
     @password_hash.setter
     def password_hash(self, password):
         hashed_pw = bcrypt.generate_password_hash(password).decode("utf8")
-        self._password_hash = hashed_pw  
+        self._password_hash = hashed_pw
         
+    def authenticate(self, provided_password):
+        return bcrypt.check_password_hash(self._password_hash, provided_password)
+
     def __repr__(self):
-        return f"User ID: {self.id} /nName: {self.name} /nEmail: {self.email} /nAdmin: {self.admin}"
+        return f"< User ID: {self.id} / Username: {self.name} / Email: {self.email} / Admin: {self.admin} >"
+    
+    
     
 class Post(db.Model, SerializerMixin):
     __tablename__ = "posts"
     
     id = db.Column(db.Integer, primary_key=True)
-    poster_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     tags = db.Column(db.String)
     header = db.Column(db.String(30))
     body = db.Column(db.String)
-    replies = db.relationship('Reply', secondary=post_reply, backref='posts')
+    replies = db.relationship('Reply', secondary=post_reply, back_populates='post')
     
 class Reply(db.Model, SerializerMixin):
     __tablename__ = "replies"
     
     id = db.Column(db.Integer, primary_key=True)
-    replier_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"))
     body = db.Column(db.String)
-    
+    post = db.relationship('Post', secondary=post_reply, back_populates='replies')
 
