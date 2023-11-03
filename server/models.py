@@ -40,9 +40,9 @@ class User(db.Model, SerializerMixin):
     def authenticate(self, provided_password):
         return bcrypt.check_password_hash(self._password_hash, provided_password)
 
+    
     def __repr__(self):
         return f"< User ID: {self.id} / Username: {self.name} / Email: {self.email} / Admin: {self.admin} >"
-    
     
     
 class Post(db.Model, SerializerMixin):

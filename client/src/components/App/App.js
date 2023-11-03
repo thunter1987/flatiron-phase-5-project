@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Home from "../Home/Home";
 import Signup from "../Signup-Login/Signup";
@@ -15,27 +10,26 @@ import { useState } from "react";
 function App() {
   const [user, setUser] = useState();
   const [errors, setErrors] = useState([]);
-  const navigate = Navigate;
 
   return (
     <Router>
-      <Navbar navigate={navigate} user={user} />
-      <div className="app">
-        <div className="routes">
+      <Navbar user={user} />
+      <div className='app'>
+        <div className='routes'>
           <Routes>
             <Route
               exact
-              path="/"
+              path='/'
               element={<Home user={user} setUser={setUser} />}
             />
-            <Route path="/signup" element={<Signup />} />
+            <Route path='/signup' element={<Signup />} />
             <Route
-              path="/login"
+              path='/login'
               element={
-                <Login user={user} setUser={setUser} navigate={navigate} />
+                <Login user={user} setUser={setUser} />
               }
             />
-            <Route path="/logout" element={<Logout />} />
+            <Route path='/logout' element={<Logout />} />
           </Routes>
         </div>
       </div>

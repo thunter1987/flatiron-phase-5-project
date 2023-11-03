@@ -1,7 +1,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import Flask, render_template
+from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_migrate import Migrate
@@ -11,6 +11,7 @@ from sqlalchemy import MetaData
 from dotenv import load_dotenv
 
 # Local imports
+from datetime import timedelta
 import os
 
 load_dotenv()
@@ -18,13 +19,11 @@ load_dotenv()
 # Instantiate app, set attributes
 app = Flask(
     __name__,
-    static_url_path='',
-    static_folder='../client/build',
-    template_folder='../client/build'
+    # static_url_path='',
+    # static_folder='../client/build',
+    # template_folder='../client/build'
     )
-
-def index(id=0):
-    return render_template("index.html")
+bcrypt = Bcrypt(app)
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -46,4 +45,3 @@ api = Api(app)
 
 # Instantiate CORS
 CORS(app)
-bcrypt = Bcrypt(app)
