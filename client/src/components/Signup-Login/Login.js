@@ -9,7 +9,6 @@ export default function Login({ user, setUser, navigate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userData);
-    if (userData.password2 === userData.password) {
       const config = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -17,7 +16,7 @@ export default function Login({ user, setUser, navigate }) {
       };
       fetch("/login", config).then((resp) => {
         if (resp.ok) {
-          resp.json().then(user => {
+          resp.json().then((user) => {
             setUser(user)
             navigate('/')
           })
@@ -26,7 +25,6 @@ export default function Login({ user, setUser, navigate }) {
         }
       });
     };
-  };
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -58,7 +56,7 @@ export default function Login({ user, setUser, navigate }) {
           placeholder="Password"
           onChange={ handleChange }
         />
-        <input type="submit" value="register" />
+        <input type="submit" value="Login" />
         <a href="/signup">Register for an Account?</a>
       </form>
     </div>
