@@ -27,6 +27,7 @@ def index():
 
 
 class Login(Resource):
+    
     def post(self):
         data = request.get_json()
         user = User.query.filter(User.username == data['username']).first()

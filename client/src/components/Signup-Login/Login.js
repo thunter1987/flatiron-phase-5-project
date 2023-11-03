@@ -9,22 +9,22 @@ export default function Login({ user, setUser, navigate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userData);
-      const config = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData)
-      };
-      fetch("/login", config).then((resp) => {
-        if (resp.ok) {
-          resp.json().then((user) => {
-            setUser(user)
-            navigate('/')
-          })
-        } else {
-          resp.json().then(data => setErrors(data.errors))
-        }
-      });
+    const config = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userData)
     };
+    fetch("/login", config).then((resp) => {
+      if (resp.ok) {
+        resp.json().then((user) => {
+          setUser(user)
+          navigate('/')
+        })
+      } else {
+        resp.json().then(data => setErrors(data.errors))
+      }
+    });
+  };
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
