@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './styles.css';
 
-const Home = () => {
-    const [user, setUser] = useState(null);
-
+const Home = ({ user, setUser}) => {
+    
 
     return (
         <div>Home</div>

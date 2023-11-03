@@ -12,7 +12,7 @@ export default function Login({ user, setUser, navigate }) {
     const config = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userData)
+      body: JSON.stringify({userData})
     };
     fetch("/login", config).then((resp) => {
       if (resp.ok) {
@@ -21,7 +21,7 @@ export default function Login({ user, setUser, navigate }) {
           navigate('/')
         })
       } else {
-        resp.json().then(data => setErrors(data.errors))
+        resp.json().then((data) => setErrors(data.errors))
       }
     });
   };

@@ -26,35 +26,20 @@ def index():
     return "Welcome to the User Database Project"
 
 
-class Login(Resource):
-    
-    def post(self):
-        data = request.get_json()
-        user = User.query.filter(User.username == data['username']).first()
+@app.route('/login', methods=['POST'])    
+def login():
+    data = request.get_json()
+    user = User.query.filter(User.username == data['username']).first()
         
-        if user:
-            if user.authenticate(data['password']):
-                session['user.id'] = user.id
-                return user.todict(), 200
+    if user:
+        if user.authenticate(data['password']):
+            session['user.id'] = user.id
+            return user.todict(), 200
         else:
             return {'errors': ['Incorrect credentials provided']}, 401
+    else:
+        return {'errors': ['Incorrect credentials provided']}, 401
 
-        # Add new user to DB
-        db.session.add(user)
-        db.session.commit()
-
-        # Create session
-        session["user_id"] = user.id
-
-        response = make_response(
-            user.to_dict(),
-            201,
-        )
-
-        return response
-
-
-api.add_resource(Login, "/login")
 
 @app.route("/authorized", methods=["GET"])
 def authorized():
