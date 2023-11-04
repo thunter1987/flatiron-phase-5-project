@@ -5,10 +5,10 @@ name = "pypi"
 
 [packages]
 ipdb = "0.13.9"
-flask = "2.2.2"
+flask = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "3.1.0"
-sqlalchemy-serializer = "1.4.1"
+sqlalchemy-serializer = "*"
 flask-restful = "0.3.10"
 flask-cors = "4.0.0"
 faker = "*"
@@ -21,4 +21,4 @@ flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
 
 [requires]
-python_full_version = "3.8.13"
+python_full_version = "3.11.4"
