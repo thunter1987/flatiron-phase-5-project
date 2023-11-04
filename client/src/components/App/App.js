@@ -6,32 +6,48 @@ import Login from "../Signup-Login/Login";
 import "./App.css";
 import Logout from "../Signup-Login/Logout";
 import Profile from "../Profile/Profile";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [user, setUser] = useState();
   const [errors, setErrors] = useState([]);
 
+  useEffect(() => {
+    fetchUser();
+  });
+
+  const fetchUser = () => {
+    fetch("/authorized")
+      .then((resp) => {
+        if (resp.ok) {
+          console.log("Response OK");
+        } else {
+          console.log("Response is not OK!!!!");
+        }
+      })
+      .then((data) => console.log(data));
+  };
   return (
     <Router>
       <Navbar user={user} />
-      <div className='app'>
-        <div className='routes'>
+      <div className="app">
+        <div className="routes">
           <Routes>
             <Route
               exact
-              path='/'
+              path="/"
               element={<Home user={user} setUser={setUser} />}
             />
-            <Route path='/signup' element={<Signup />} />
+            <Route path="/signup" element={<Signup />} />
             <Route
-              path='/login'
-              element={
-                <Login user={user} setUser={setUser} />
-              }
+              path="/login"
+              element={<Login user={user} setUser={setUser} />}
             />
-            <Route path="/profile/:{user.username}" element={<Profile user={user}/>} />
-            <Route path='/logout' element={<Logout />} />
+            <Route
+              path="/profile/:{user.username}"
+              element={<Profile user={user} />}
+            />
+            <Route path="/logout" element={<Logout />} />
           </Routes>
         </div>
       </div>
