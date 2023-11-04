@@ -5,6 +5,7 @@ import Signup from "../Signup-Login/Signup";
 import Login from "../Signup-Login/Login";
 import "./App.css";
 import Logout from "../Signup-Login/Logout";
+import Profile from "../Profile/Profile";
 import { useState } from "react";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                 <Login user={user} setUser={setUser} />
               }
             />
+            <Route path="/profile/:{user.username}" element={<Profile user={user}/>} />
             <Route path='/logout' element={<Logout />} />
           </Routes>
         </div>
