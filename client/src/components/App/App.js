@@ -20,12 +20,12 @@ function App() {
     fetch("/authorized")
       .then((resp) => {
         if (resp.ok) {
-          console.log("Response OK");
+          resp.json();
+          console.log(resp);
         } else {
           console.log("Response is not OK!!!!");
         }
       })
-      .then((data) => console.log(data));
   };
   return (
     <Router>

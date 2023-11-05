@@ -22,13 +22,7 @@ export default function Signup() {
       const config = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          username: userData.username,
-          email: userData.email,
-          password: userData.password,
-        }),
+        body: JSON.stringify(userData),
       };
       fetch("/users", config)
         .then((resp) => resp.json())
