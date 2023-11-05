@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     fetchUser();
-  });
+  }, []);
 
   const fetchUser = () => {
     fetch("/authorized")
@@ -23,7 +23,8 @@ function App() {
           resp.json();
           console.log(resp);
         } else {
-          console.log("Response is not OK!!!!");
+          resp.json().then(err => setErrors(err))
+          return <h1>{errors}</h1>
         }
       })
   };
@@ -32,7 +33,7 @@ function App() {
       <Navbar user={user} />
       <div className="app">
         <div className="routes">
-          <Routes>
+          <Routes >
             <Route
               exact
               path="/"
