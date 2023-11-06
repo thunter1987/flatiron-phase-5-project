@@ -22,8 +22,8 @@ export default function Login({ user, setUser }) {
       if (resp.ok) {
         resp.json().then((user) => {
           console.log(user)
-          setUser(user);
-          navigate('/profile/:{user.username}')
+          setUser(user)
+          navigate('/profile:{user.username}')
         })
       }
       else {

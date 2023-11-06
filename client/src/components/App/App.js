@@ -15,12 +15,18 @@ function App() {
   useEffect(() => {
     fetchUser();
   }, []);
+  
+  const config = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  };
 
   const fetchUser = () => {
-    fetch("/authorized")
-      .then((resp) => {
+    fetch("/authorized", config)
+      .then(resp => {
         if (resp.ok) {
-          resp.json();
+          resp.json()
           console.log(resp);
         } else {
           resp.json().then(err => setErrors(err))
@@ -45,7 +51,7 @@ function App() {
               element={<Login user={user} setUser={setUser} />}
             />
             <Route
-              path="/profile/:{user.username}"
+              path="/profile:{user.username}"
               element={<Profile user={user} />}
             />
             <Route path="/logout" element={<Logout />} />

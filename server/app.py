@@ -51,7 +51,7 @@ class Login(Resource):
             return {"errors": ["Incorrect credentials provided"]}, 401
         
 
-@app.route("/login/<string:username>")
+@app.route("/profile/<string:username>")
 def user(username):
     return f"<h1>Profile for {username}</h1>"
 

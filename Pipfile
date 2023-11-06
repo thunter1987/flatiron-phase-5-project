@@ -19,6 +19,7 @@ flask-bcrypt = "*"
 werkzeug = "==2.2.2"
 flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
+sqlalchemy = "*"
 
 [requires]
 python_full_version = "3.11.4"
