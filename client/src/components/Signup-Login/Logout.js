@@ -1,7 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Logout() {
-  const handleLogout = () => console.log("Logging Out");
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    fetch('/logout', {method: "DELETE"})
+    navigate('/')
+  }
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Home from "../Home/Home";
 import Signup from "../Signup-Login/Signup";
@@ -9,25 +9,17 @@ import Profile from "../Profile/Profile";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [errors, setErrors] = useState([]);
-
   useEffect(() => {
     fetchUser();
   }, []);
-  
-  const config = {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(user),
-  };
 
   const fetchUser = () => {
-    fetch("/authorized", config)
+    fetch("/authorized")
       .then(resp => {
         if (resp.ok) {
-          resp.json()
-          console.log(resp);
+          resp.json().then(user => setUser(user))
         } else {
           resp.json().then(err => setErrors(err))
           return <h1>{errors}</h1>
@@ -46,14 +38,15 @@ function App() {
               element={<Home user={user} setUser={setUser} />}
             />
             <Route path="/signup" element={<Signup />} />
+            (user ?
             <Route
               path="/login"
               element={<Login user={user} setUser={setUser} />}
-            />
+            /> :
             <Route
-              path="/profile:{user.username}"
+              path='/profile/:<user.username>'
               element={<Profile user={user} />}
-            />
+            />)
             <Route path="/logout" element={<Logout />} />
           </Routes>
         </div>

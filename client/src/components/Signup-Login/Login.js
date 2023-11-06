@@ -23,7 +23,7 @@ export default function Login({ user, setUser }) {
         resp.json().then((user) => {
           console.log(user)
           setUser(user)
-          navigate('/profile:{user.username}')
+          navigate('/profile/{user.username}')
         })
       }
       else {

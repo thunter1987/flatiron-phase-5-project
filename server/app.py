@@ -31,19 +31,11 @@ class Login(Resource):
 
         if user:
             if user.authenticate(data["password"]):
-                session["user.id"] = user.id
+                session["user_id"] = user.id
                 time_date = datetime.now() + timedelta(hours=4)
                 expiry_date = datetime.now() + timedelta(days=30)
                 resp = make_response(user.to_dict())
-                
-                resp.set_cookie(
-                    key="userId",
-                    value='user.id',
-                    max_age=time_date,
-                    expires=expiry_date,
-                    httponly=True,
-                    secure=True,
-                )
+
                 return resp
             else:
                 return {"errors": ["Incorrect credentials provided"]}, 401
@@ -51,7 +43,7 @@ class Login(Resource):
             return {"errors": ["Incorrect credentials provided"]}, 401
         
 
-@app.route("/profile/<string:username>")
+@app.route(f"/profile/{User.username}")
 def user(username):
     return f"<h1>Profile for {username}</h1>"
 
