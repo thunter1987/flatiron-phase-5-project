@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Home from "../Home/Home";
 import Signup from "../Signup-Login/Signup";
@@ -16,42 +17,45 @@ function App() {
   }, []);
 
   const fetchUser = () => {
-    fetch("/authorized")
-      .then(resp => {
-        if (resp.ok) {
-          resp.json().then(user => setUser(user))
-        } else {
-          resp.json().then(err => setErrors(err))
-          return <h1>{errors}</h1>
-        }
-      })
+    fetch("/authorized").then(resp => {
+      if (resp.ok) {
+        resp.json().then(user => setUser(user));
+      } else {
+        resp.json().then(err => setErrors(err));
+        return <h1>{errors}</h1>;
+      }
+    });
   };
   return (
-    <Router>
-      <Navbar user={user} />
-      <div className="app">
-        <div className="routes">
-          <Routes >
-            <Route
-              exact
-              path="/"
-              element={<Home user={user} setUser={setUser} />}
-            />
-            <Route path="/signup" element={<Signup />} />
-            (user ?
-            <Route
-              path="/login"
-              element={<Login user={user} setUser={setUser} />}
-            /> :
-            <Route
-              path='/profile/:<user.username>'
-              element={<Profile user={user} />}
-            />)
-            <Route path="/logout" element={<Logout />} />
-          </Routes>
+    <>
+      <Router>
+        <Navbar user={user} />
+        <div className="app">
+          <div className="routes">
+            <Routes >
+              <Route
+                exact
+                path="/"
+                element={<Home user={user} setUser={setUser} />}
+              />
+              <Route path="/signup" element={<Signup />} />
+              (user ?
+              <Route
+                path="/login"
+                element={<Login user={user} setUser={setUser} />}
+              />
+              :
+              <Route
+                path="/profile/:<user.username>"
+                element={<Profile user={user} />}
+              />
+              )
+              <Route path="/logout" element={<Logout />} />
+            </Routes>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </>
   );
 }
 

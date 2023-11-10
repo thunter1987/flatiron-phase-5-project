@@ -12,7 +12,6 @@ from sqlalchemy import MetaData
 from dotenv import load_dotenv
 
 # Local imports
-from datetime import timedelta
 import os
 
 load_dotenv()

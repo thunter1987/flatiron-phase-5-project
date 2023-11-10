@@ -9,7 +9,6 @@ from flask_restful import Resource
 # Local imports
 from config import app, db, api
 from dotenv import load_dotenv
-from datetime import datetime, timedelta
 
 # Add your model imports
 from models import User, Post, Reply
@@ -32,8 +31,6 @@ class Login(Resource):
         if user:
             if user.authenticate(data["password"]):
                 session["user_id"] = user.id
-                time_date = datetime.now() + timedelta(hours=4)
-                expiry_date = datetime.now() + timedelta(days=30)
                 resp = make_response(user.to_dict())
 
                 return resp
@@ -41,7 +38,7 @@ class Login(Resource):
                 return {"errors": ["Incorrect credentials provided"]}, 401
         else:
             return {"errors": ["Incorrect credentials provided"]}, 401
-        
+
 
 @app.route(f"/profile/{User.username}")
 def user(username):
