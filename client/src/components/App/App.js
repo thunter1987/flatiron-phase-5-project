@@ -17,14 +17,14 @@ function App() {
   }, []);
 
   const fetchUser = () => {
-    fetch("/authorized").then(resp => {
+    fetch("/authorized").then((resp) => {
       if (resp.ok) {
-        resp.json().then(user => setUser(user));
+        resp.json().then((user) => setUser(user));
       } else {
-        resp.json().then(err => setErrors(err));
+        resp.json().then((err) => setErrors(err));
         return <h1>{errors}</h1>;
       }
-    });
+    },[])
   };
   return (
     <>
@@ -32,17 +32,17 @@ function App() {
         <Navbar user={user} />
         <div className="app">
           <div className="routes">
-            <Routes >
+            <Routes>
               <Route
                 exact
                 path="/"
                 element={<Home user={user} setUser={setUser} />}
               />
-              <Route path="/signup" element={<Signup />} />
+              <Route path="/signup" element={<Signup user={user} setUser={setUser} errors={errors} setErrors={setErrors}/>} />
               (user ?
               <Route
                 path="/login"
-                element={<Login user={user} setUser={setUser} />}
+                element={<Login user={user} setUser={setUser} errors={errors} setErrors={setErrors}/>}
               />
               :
               <Route

@@ -3,6 +3,7 @@
 # Standard library imports
 
 # Remote library imports
+import bcrypt
 from flask import request, make_response, jsonify, session
 from flask_restful import Resource
 
@@ -36,8 +37,35 @@ class Login(Resource):
                 return resp
             else:
                 return {"errors": ["Incorrect credentials provided"]}, 401
+        
+        return {"errors": ["Incorrect credentials provided"]}, 401
+        
+class SignUp(Resource):
+    def post(self):
+        data = request.get_json()
+        if User.query.filter(User.username == data["username"]).first():
+            return {"errors": ["Username is Already Taken"]}, 403
+            
+        user = User(
+            first_name = data["firstName"],
+            last_name = data["lastName"],
+            username = data["username"],
+            email = data["email"]
+            )
+        password = data["password"],
+        password2 = data["password2"]
+        
+        if password != password2:
+            return ["Passwords Do Not Match"], 401
+
         else:
-            return {"errors": ["Incorrect credentials provided"]}, 401
+            user.password_hash = password
+            db.session.add(user)
+            db.session.commit()
+            return "Profile Created Successfully"
+        
+            
+                
 
 
 @app.route(f"/profile/{User.username}")
@@ -61,6 +89,7 @@ def logout():
 
 
 api.add_resource(Login, "/login")
+api.add_resource(SignUp, "/signup")
 
 
 if __name__ == "__main__":
